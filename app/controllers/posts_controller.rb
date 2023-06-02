@@ -16,3 +16,38 @@ class PostsController < ApplicationController
   end
 
 end
+
+class PostsController < ApplicationController
+  before_action :authenticate_user, only: [:new, :create]
+
+  private
+
+  def authenticate_user
+    unless @current_user
+      redirect_to login_path
+    end
+  end
+end
+
+# app/controllers/posts_controller.rb
+class PostsController < ApplicationController
+  def create
+    @post = @current_user.posts.build(post_params)
+    if @post.save
+      redirect_to @post
+    else
+      render :new
+    end
+  end
+end
+
+# app/controllers/posts_controller.rb
+class PostsController < ApplicationController
+  def index
+    @posts = @current_user.posts
+  end
+
+  # Other controller code...
+end
+
+

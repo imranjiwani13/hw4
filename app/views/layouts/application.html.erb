@@ -23,3 +23,46 @@
     <%= yield %>
   </body>
 </html>
+
+
+<% if @current_user %>
+  <%= link_to 'Logout', logout_path %>
+<% else %>
+  <%= link_to 'Login', login_path %> |
+  <%= link_to 'Signup', new_user_path %>
+<% end %>
+
+<!-- app/views/layouts/application.html.erb -->
+<head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<!-- app/views/layouts/application.html.erb -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <%= link_to "Home", root_path, class: "navbar-brand" %>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <% if @current_user %>
+        <li class="nav-item">
+          <%= link_to "Logout", logout_path, method: :delete, class: "nav-link" %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "Login", login_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Signup", signup_path, class: "nav-link" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+
+<!-- app/views/layouts/application.html.erb -->
+<div class="container">
+  <%= yield %>
+</div>
+
+<%= form.submit "Log In", class: "btn btn-primary" %>
+

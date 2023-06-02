@@ -6,3 +6,16 @@
     <%= form.submit "Login" %>
   </p>
 <% end %>
+
+<%= form_for(:session, url: login_path) do |f| %>
+  <%= f.label :email %>
+  <%= f.email_field :email, required: true %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password, required: true %>
+
+  <%= f.submit "Log in" %>
+<% end %>
+
+<%= form.submit "Log In", class: "btn btn-primary" %>
+
